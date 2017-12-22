@@ -3,6 +3,8 @@ import './App.css';
 import Person from './Person/Person';
 
 class App extends Component {
+  // any change to container's state will trigger render method
+  // changes should be through setState method!
   state = {
     persons: [
       {name: 'Vassya', age: 19},
@@ -55,6 +57,7 @@ class App extends Component {
       </div>
 
     );
+    // when we use jsx this is how react actually creates elements under the hood
     //return React.createElement('div', {className: 'App'}, React.createElement('h1', null, 'My text'));
 
   }
