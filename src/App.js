@@ -20,29 +20,37 @@ class App extends Component {
     });
   };
 
+  renderShowHideBtn = () => {
+    return (
+      <button onClick={this.togglePersonsHandler}>
+        {
+          this.state.showPersons ? "Hide people" : "Show people"
+        }
+      </button>
+    );
+  };
+
   render() {
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = this.state.persons.map((person, index) => {
+        return (
+          <Person
+            name={person.name}
+            age={person.age}
+            key={index}
+          />
+        );
+      })
+    }
+
     return (
       <div className="App">
         <h1>People</h1>
-        <button onClick={this.togglePersonsHandler}>
-          {
-            this.state.showPersons ? "Hide people" : "Show people"
-          }
-        </button>
-        {
-          this.state.showPersons ?
-            this.state.persons.map((person, index) => {
-              return (
-                <Person
-                  name={person.name}
-                  age={person.age}
-                  key={index}
-                />
-              );
-            })
-
-            : null
-        }
+        {this.renderShowHideBtn()}
+        {persons}
 
       </div>
 
