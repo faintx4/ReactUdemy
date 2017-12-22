@@ -5,14 +5,13 @@ import Person from './Person/Person';
 class App extends Component {
   // any change to container's state will trigger render method
   // changes should be through setState method!
-  //test
   state = {
     persons: [
-      {name: 'Vassya', age: 19},
-      {name: 'Kolia', age: 23},
-      {name: 'Ira', age: 43},
-      {name: 'Dima', age: 44},
-      {name: 'Alex', age: 55},
+      {id: 'kjsdkjf', name: 'Vassya', age: 19},
+      {id: '43kjnfd', name: 'Kolia', age: 23},
+      {id: 'sdfpwwf', name: 'Ira', age: 43},
+      {id: 'fdsdfdf', name: 'Dima', age: 44},
+      {id: '2343fdf', name: 'Alex', age: 55},
     ],
     showPersons: true
   };
@@ -33,6 +32,25 @@ class App extends Component {
     );
   };
 
+  removePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons});
+  };
+
+  nameChangeHandler = (event, personId) => {
+    const persons = [...this.state.persons];
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id === personId;
+    });
+
+    persons[personIndex].name = event.target.value;
+
+    this.setState({persons});
+
+  };
+
   render() {
 
     let persons = null;
@@ -43,7 +61,9 @@ class App extends Component {
           <Person
             name={person.name}
             age={person.age}
-            key={index}
+            key={person.id}
+            click={() => this.removePersonHandler(index)}
+            onChangeName={(event) => this.nameChangeHandler(event, person.id)}
           />
         );
       })
