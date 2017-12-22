@@ -1,0 +1,16 @@
+.person-card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 2px #ccc;
+    background-color: beige;
+}
+
+.person-card__name {
+    font-size: 14px;
+    color: black;
+}
+
+.person-card__age {
+    color: blueviolet;
+}
