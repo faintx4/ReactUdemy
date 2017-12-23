@@ -5,6 +5,7 @@ import Person from './Person/Person';
 class App extends Component {
   // any change to container's state will trigger render method
   // changes should be through setState method!
+  // test
   state = {
     persons: [
       {id: 'kjsdkjf', name: 'Vassya', age: 19},
