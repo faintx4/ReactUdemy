@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import './App.css';
 import Person from './Person/Person';
+import ValidationComponent from './ValidationComponent';
+import CharComponent from "./CharComponent";
 
 class App extends Component {
   // any change to container's state will trigger render method
   // changes should be through setState method!
-  // test
+
   state = {
     persons: [
       {id: 'kjsdkjf', name: 'Vassya', age: 19},
@@ -14,7 +16,8 @@ class App extends Component {
       {id: 'fdsdfdf', name: 'Dima', age: 44},
       {id: '2343fdf', name: 'Alex', age: 55},
     ],
-    showPersons: true
+    showPersons: true,
+    inputText: ''
   };
 
   togglePersonsHandler = () => {
@@ -52,6 +55,22 @@ class App extends Component {
 
   };
 
+  setInputText= (event) => {
+    this.setState({
+      inputText: event.target.value
+    });
+  };
+
+  removeChar = (charIndex) => {
+    let charsArray = this.state.inputText.split('');
+
+    charsArray.splice(charIndex, 1);
+
+    this.setState({
+      inputText: charsArray.join('')
+    });
+  };
+
   render() {
 
     let persons = null;
@@ -70,12 +89,21 @@ class App extends Component {
       })
     }
 
+    const charArray = this.state.inputText.split('').map((char, index) => {
+      return <CharComponent char={char} key={index} removeChar={() => this.removeChar(index)}/>;
+    });
+
     return (
       <div className="App">
         <h1>People</h1>
         {this.renderShowHideBtn()}
-        {persons}
-
+        <div>{persons}</div>
+        <div>
+          {charArray}
+        </div>
+        <p>text length: {this.state.inputText.length}</p>
+        <input type="text" onChange={this.setInputText} value={this.state.inputText}/>
+        <ValidationComponent textLength={this.state.inputText.length}/>
       </div>
 
     );
