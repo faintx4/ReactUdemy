@@ -1,13 +1,11 @@
 import React from 'react';
 import './Person.css';
-import Radium from 'radium';
+
 
 const person = (props) => {
   const style = {
-    backgroundColor: '#ccc',
-    ':hover': {
-      backgroundColor: 'red'
-    }
+    backgroundColor: '#ccc'
+
   };
 
   return (
@@ -22,4 +20,5 @@ const person = (props) => {
   );
 };
 
-export default Radium(person);
+export default person;
+//export default Radium(person);
