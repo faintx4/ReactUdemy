@@ -2,7 +2,10 @@ import React from 'react';
 
 const userOutput = (props) => {
   const style = {
-    backgroundColor: '#ccc'
+    backgroundColor: '#ccc',
+    ':hover': {
+      backgroundColor: 'red'
+    }
   };
 
   return (

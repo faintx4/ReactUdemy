@@ -4,9 +4,7 @@ const ValidationComponent = (props) => {
   const validationMessage = props.textLength < 5 ? 'Text too short': 'Text long enough';
 
   return (
-    <div>
-      {validationMessage}
-    </div>
+    <div>{validationMessage}</div>
   );
 };
 
