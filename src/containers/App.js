@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
+import Persons from '../components/Persons/Persons';
+import Cockpit from "../components/Cockpit/Cockpit";
+import Chars from "../components/Chars/Chars";
 import './App.css';
-import Person from '../components/Persons/Person/Person';
-import ValidationComponent from '../components/Validation/ValidationComponent';
-import CharComponent from "../components/Char/CharComponent";
 
 class App extends Component {
   // any change to container's state will trigger render method
@@ -24,16 +24,6 @@ class App extends Component {
     this.setState({
       showPersons: !this.state.showPersons
     });
-  };
-
-  renderShowHideBtn = () => {
-    return (
-      <button onClick={this.togglePersonsHandler}>
-        {
-          this.state.showPersons ? "Hide people" : "Show people"
-        }
-      </button>
-    );
   };
 
   removePersonHandler = (personIndex) => {
@@ -72,38 +62,17 @@ class App extends Component {
   };
 
   render() {
-
-    let persons = null;
-
-    if (this.state.showPersons) {
-      persons = this.state.persons.map((person, index) => {
-        return (
-          <Person
-            name={person.name}
-            age={person.age}
-            key={person.id}
-            click={() => this.removePersonHandler(index)}
-            onChangeName={(event) => this.nameChangeHandler(event, person.id)}
-          />
-        );
-      })
-    }
-
-    const charArray = this.state.inputText.split('').map((char, index) => {
-      return <CharComponent char={char} key={index} removeChar={() => this.removeChar(index)}/>;
-    });
-
     return (
       <div className="App">
-        <h1>People</h1>
-        {this.renderShowHideBtn()}
-        <div style={{marginTop: '20px'}}>{persons}</div>
-        <div>
-          {charArray}
-        </div>
-        <p>text length: {this.state.inputText.length}</p>
-        <input type="text" onChange={this.setInputText} value={this.state.inputText}/>
-        <ValidationComponent textLength={this.state.inputText.length}/>
+        <Chars inputText={this.state.inputText} removeChar={this.removeChar} setInputText={this.setInputText}/>
+
+        <Cockpit showPersons={this.state.showPersons} togglePersonsHandler={this.togglePersonsHandler}/>
+
+        <Persons persons={this.state.persons}
+                 showPersons={this.state.showPersons}
+                 removePersonHandler={this.removePersonHandler}
+                 nameChangeHandler={this.nameChangeHandler}
+        />
       </div>
 
     );
