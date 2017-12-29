@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import './App.css';
-import Person from './Person/Person';
-import ValidationComponent from './ValidationComponent';
-import CharComponent from "./CharComponent";
+import Person from '../components/Persons/Person/Person';
+import ValidationComponent from '../components/Validation/ValidationComponent';
+import CharComponent from "../components/Char/CharComponent";
 
 class App extends Component {
   // any change to container's state will trigger render method
@@ -97,7 +97,7 @@ class App extends Component {
       <div className="App">
         <h1>People</h1>
         {this.renderShowHideBtn()}
-        <div>{persons}</div>
+        <div style={{marginTop: '20px'}}>{persons}</div>
         <div>
           {charArray}
         </div>
