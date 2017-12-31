@@ -41,27 +41,14 @@ class Persons extends Component {
   render() {
     console.log('[Persons.js] from render()');
 
-    let persons = null;
-
-    if (this.props.showPersons) {
-      persons = this.props.persons.map((person, index) => {
-        return (
-          <Person
-            name={person.name}
-            age={person.age}
-            key={person.id}
-            click={() => this.props.removePersonHandler(index)}
-            onChangeName={(event) => this.props.nameChangeHandler(event, person.id)}
-          />
-        );
-      });
-    }
-
-    return (
-      <div>
-        <div style={{marginTop: '20px'}}>{persons}</div>
-      </div>
-    );
+    return this.props.persons.map((person, index) => {
+      return <Person
+        click={() => this.props.removePersonHandler(index)}
+        name={person.name}
+        age={person.age}
+        key={person.id}
+        changed={(event) => this.props.nameChangeHandler(event, person.id)}/>
+    });
   }
 }
 

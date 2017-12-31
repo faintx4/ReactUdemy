@@ -24,6 +24,23 @@ class App extends Component {
     console.log('[App.js] from componentDidMount');
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('UPDATE [App.js] shouldComponentUpdate', nextProps, nextState);
+    return this.state.persons !== nextState.persons ||
+      this.state.showPersons !== nextState.showPersons ||
+      this.state.inputText !== nextState.inputText;
+  }
+
+
+  componentWillUpdate(nextProps, nextState) {
+    console.log('UPDATE [App.js] componentWillUpdate', nextProps, nextState);
+  }
+
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('UPDATE [App.js] componentDidUpdate', prevProps, prevState);
+  }
+
   state = {
     persons: [
       {id: 'kjsdkjf', name: 'Vassya', age: 19},
@@ -32,7 +49,7 @@ class App extends Component {
       {id: 'fdsdfdf', name: 'Dima', age: 44},
       {id: '2343fdf', name: 'Alex', age: 55},
     ],
-    showPersons: true,
+    showPersons: false,
     inputText: ''
   };
 
@@ -79,18 +96,29 @@ class App extends Component {
 
   render() {
     console.log('[App.js] from render()');
+
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = <Persons
+        persons={this.state.persons}
+        removePersonHandler={this.removePersonHandler}
+        nameChangeHandler={this.nameChangeHandler}
+      />
+    }
+
     return (
       <div className="App">
+        <button onClick={() => {
+          this.setState({showPersons: true})
+        }}>Show persons
+        </button>
         <h1>{this.props.title}</h1>
         <Chars inputText={this.state.inputText} removeChar={this.removeChar} setInputText={this.setInputText}/>
 
         <Cockpit showPersons={this.state.showPersons} togglePersonsHandler={this.togglePersonsHandler}/>
 
-        <Persons persons={this.state.persons}
-                 showPersons={this.state.showPersons}
-                 removePersonHandler={this.removePersonHandler}
-                 nameChangeHandler={this.nameChangeHandler}
-        />
+        <div>{persons}</div>
       </div>
 
     );

@@ -29,7 +29,7 @@ class Person extends Component {
         <h1 className="person-card__name" onClick={this.props.click}>My name is {this.props.name}</h1>
         <h2 className="person-card__age">I am {this.props.age} years old!</h2>
         <p>{this.props.children}</p>
-        <input type="text" value={this.props.name} onChange={this.props.onChangeName}/>
+        <input type="text" value={this.props.name} onChange={this.props.changed}/>
       </div>
     );
   }
