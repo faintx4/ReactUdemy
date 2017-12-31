@@ -8,6 +8,22 @@ class App extends Component {
   // any change to container's state will trigger render method
   // changes should be through setState method!
 
+  constructor(props) {
+    super(props);
+
+    console.log('[App.js] from constructor');
+  }
+
+
+  componentWillMount() {
+    console.log('[App.js] from componentWillMount');
+  }
+
+
+  componentDidMount() {
+    console.log('[App.js] from componentDidMount');
+  }
+
   state = {
     persons: [
       {id: 'kjsdkjf', name: 'Vassya', age: 19},
@@ -45,7 +61,7 @@ class App extends Component {
 
   };
 
-  setInputText= (event) => {
+  setInputText = (event) => {
     this.setState({
       inputText: event.target.value
     });
@@ -62,8 +78,10 @@ class App extends Component {
   };
 
   render() {
+    console.log('[App.js] from render()');
     return (
       <div className="App">
+        <h1>{this.props.title}</h1>
         <Chars inputText={this.state.inputText} removeChar={this.removeChar} setInputText={this.setInputText}/>
 
         <Cockpit showPersons={this.state.showPersons} togglePersonsHandler={this.togglePersonsHandler}/>
