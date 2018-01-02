@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import Persons from '../components/Persons/Persons';
 import Cockpit from "../components/Cockpit/Cockpit";
 import Chars from "../components/Chars/Chars";
+import Aux from '../hoc/auxc';
+import WithClass2 from '../hoc/withClass2';
 import './App.css';
 
 class App extends Component {
@@ -50,13 +52,19 @@ class App extends Component {
       {id: '2343fdf', name: 'Alex', age: 55},
     ],
     showPersons: false,
-    inputText: ''
+    inputText: '',
+    toggleClicked: 0
   };
 
   togglePersonsHandler = () => {
-    this.setState({
-      showPersons: !this.state.showPersons
-    });
+    // setState is working asynchronously!
+    // so it's better to use callback function like this
+    this.setState((prevState, props) => {
+      return {
+        showPersons: !prevState.showPersons,
+        toggleClicked: prevState.toggleClicked + 1
+      };
+    })
   };
 
   removePersonHandler = (personIndex) => {
@@ -119,6 +127,11 @@ class App extends Component {
         <Cockpit showPersons={this.state.showPersons} togglePersonsHandler={this.togglePersonsHandler}/>
 
         <div>{persons}</div>
+
+        <Aux>
+          <div>Just testing</div>
+          <div>High order component</div>
+        </Aux>
       </div>
 
     );
@@ -129,4 +142,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default WithClass2(App, 'someClassssss');

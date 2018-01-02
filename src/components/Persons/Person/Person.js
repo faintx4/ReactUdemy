@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import './Person.css';
+import WithClass2 from '../../../hoc/withClass2';
+import Aux from '../../../hoc/auxc';
+import PropTypes from 'prop-types';
 
 class Person extends Component {
   constructor(props) {
@@ -24,17 +27,31 @@ class Person extends Component {
       backgroundColor: '#ccc'
     };
 
-    return (
+    /*return (
       <div style={style} className="person-card">
         <h1 className="person-card__name" onClick={this.props.click}>My name is {this.props.name}</h1>
         <h2 className="person-card__age">I am {this.props.age} years old!</h2>
         <p>{this.props.children}</p>
         <input type="text" value={this.props.name} onChange={this.props.changed}/>
       </div>
+    );*/
+    return (
+      <Aux>
+        <h1 className="person-card__name" onClick={this.props.click}>My name is {this.props.name}</h1>
+        <h2 className="person-card__age">I am {this.props.age} years old!</h2>
+        <p>{this.props.children}</p>
+        <input type="text" value={this.props.name} onChange={this.props.changed}/>
+      </Aux>
     );
   }
 }
 
+Person.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number,
+  click: PropTypes.func,
+  changed: PropTypes.func
+};
 
-export default Person;
+export default WithClass2(Person, 'person-card');
 
