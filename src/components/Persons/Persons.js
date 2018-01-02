@@ -46,6 +46,7 @@ class Persons extends Component {
         click={() => this.props.removePersonHandler(index)}
         name={person.name}
         age={person.age}
+        position={index}
         key={person.id}
         changed={(event) => this.props.nameChangeHandler(event, person.id)}/>
     });

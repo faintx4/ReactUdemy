@@ -18,6 +18,7 @@ class Person extends Component {
 
   componentDidMount() {
     console.log('[Single Person.js] from componentDidMount');
+    if (this.props.position === 0) {this.inputElement.focus()}
   }
 
   render() {
@@ -40,7 +41,7 @@ class Person extends Component {
         <h1 className="person-card__name" onClick={this.props.click}>My name is {this.props.name}</h1>
         <h2 className="person-card__age">I am {this.props.age} years old!</h2>
         <p>{this.props.children}</p>
-        <input type="text" value={this.props.name} onChange={this.props.changed}/>
+        <input type="text" value={this.props.name} onChange={this.props.changed} ref={(input) => {this.inputElement = input}}/>
       </Aux>
     );
   }
@@ -50,7 +51,8 @@ Person.propTypes = {
   name: PropTypes.string,
   age: PropTypes.number,
   click: PropTypes.func,
-  changed: PropTypes.func
+  changed: PropTypes.func,
+  position: PropTypes.number
 };
 
 export default WithClass2(Person, 'person-card');
